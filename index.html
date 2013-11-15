@@ -1,0 +1,100 @@
+<!-- DOCTYPE html -->
+
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="custom.css">
+
+	</head>
+<body>
+	<canvas id="myCanvas" width="600" height="900"
+		style="border:1px solid #000000;">
+	</canvas>
+
+	
+
+	<div class="button" id="black">
+	</div>
+
+	<div class="button" id="red">
+	</div>
+	<div class="button" id="green">
+	</div>
+
+	<form id="garden">
+	<select >
+		<option selected="selected">Flowers</option>
+		<option>Shrubs</option>
+		<option>Trees</option>
+		<option>Bushes</option>
+		<option>Grass</option>
+		<option>Dirt</option>
+	</select>
+</form>
+</body>
+
+<!-- js -->
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script> 
+	var ctx=$("#myCanvas")[0].getContext("2d");
+	ctx.lineCap = "round";
+	var lineWidth = 1;
+	var color = '#00ff00';
+	
+	//mouse x y pos
+	var currentMouse = { x:-1, y:-1 };
+	var lastMouse = { x:-1, y:-1 };
+
+	//gets mouse position on every mouse move
+	$(document).mousemove(function(event){
+		
+		lastMouse.x = currentMouse.x;
+		lastMouse.y = currentMouse.y;
+		currentMouse.x = event.pageX;
+		currentMouse.y = event.pageY;
+		//console.log("last x: " + lastMouse.x + ", last y: " + lastMouse.y);
+		//console.log("current x: " + currentMouse.x + ", current y: " + currentMouse.y);
+	});
+
+	//draw when mouse is held down
+	$(document).mousedown(function(){
+			timeout= setInterval(function(){
+				//console.log("draw called");
+				ctx.beginPath();
+				ctx.moveTo(lastMouse.x, lastMouse.y);
+				ctx.lineTo(currentMouse.x, currentMouse.y);
+				ctx.strokeStyle = color;
+				ctx.lineWidth=lineWidth;
+				ctx.stroke();
+			}, .1);
+			return false;
+	});
+
+	$(document).mouseup(function(){
+		clearInterval(timeout);
+		return false;
+	});
+
+
+	$("#red").click(function(){
+		color = '#ff0000';
+		console.log(color);
+	});
+
+	$("#green").click(function(){
+		color = '#00ff00';
+		console.log(color);
+	});
+
+	$("#black").click(function(){
+		color = 'black';
+		console.log(color);
+	});
+
+	/*$("#width").change(function(){
+		lineWidth =  $("select option:selected").attr(value);
+		console.log(lineWidth)
+	});*/
+
+</script> 
+
+</html> 
