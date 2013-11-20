@@ -6,57 +6,118 @@
 
 	</head>
 <body>
-	<canvas id="myCanvas" width="600" height="900"
-		style="border:1px solid #000000;">
-	</canvas>
 
+	<div class="area">
+		<canvas id="myCanvas" width="300" height="600">
+		</canvas>
+	</div>
+	<div class="area" id="example">
+	</div>
+	
 	
 
-	<div class="button" id="black">
+	
+	<div class="toolbox">
+
+		<div class="button" id="black">
+		</div>
+
+		<div class="button" id="red">
+		</div>
+		<div class="button" id="green">
+		</div>
+
 	</div>
 
-	<div class="button" id="red">
-	</div>
-	<div class="button" id="green">
+	<div class="button" id="random">
+		Get a random word
 	</div>
 
-	<form id="garden">
-	<select>
-		<option selected="selected">Flowers</option>
-		<option>Shrubs</option>
-		<option>Trees</option>
-		<option>Bushes</option>
-		<option>Grass</option>
-		<option>Dirt</option>
-	</select>
-</form>
+	<div id="display">
+	</div>
+
+	<div class="dropdownbox">
+		 <select id = "width">
+               <option value = "1">one</option>
+               <option value = "2">two</option>
+               <option value = "3">three</option>
+               <option value = "4">four</option>
+               <option value = "5">five</option>
+               <option value = "6">six</option>
+               <option value = "7">seven</option>
+               <option value = "8">eight</option>
+               <option value = "9">nine</option>
+               <option value = "10">ten</option>
+               <option value = "20">twenty</option>
+             </select>
+            </div>
+
+	
 </body>
 
 <!-- js -->
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
 <script> 
+	
+	google.load("search", "1");
+	var imageSearch;
+
 	var ctx=$("#myCanvas")[0].getContext("2d");
+
+	//stroke properties
 	ctx.lineCap = "round";
 	var lineWidth = 1;
 	var color = '#00ff00';
-	
+
 	//mouse x y pos
 	var currentMouse = { x:-1, y:-1 };
 	var lastMouse = { x:-1, y:-1 };
+	//to account for margin
+	var xOffSet = 16;
+	var yOffset = 16;
+
+
+	var wordlist = [];
+	var total;
+
+	//error handling for mouseclicks off canvas
+	var nonCanvasClick = false;
+
+	//read wordlist into an array on pageload
+	$(function(){
+
+		
+		var file = $.get('http://dwakeat.biz/sketch/wordlist/brit-a-z.txt', function(text){
+				
+				var lines = text.split('\n');
+				total = lines.length;
+				for (i=0; i < lines.length; i++){
+					wordlist[i] = lines[i];
+				}
+		});	
+	})
+	
+	
 
 	//gets mouse position on every mouse move
 	$(document).mousemove(function(event){
 		
 		lastMouse.x = currentMouse.x;
 		lastMouse.y = currentMouse.y;
-		currentMouse.x = event.pageX;
-		currentMouse.y = event.pageY;
+		currentMouse.x = event.pageX - xOffSet;
+		currentMouse.y = event.pageY - yOffset;
 		//console.log("last x: " + lastMouse.x + ", last y: " + lastMouse.y);
 		//console.log("current x: " + currentMouse.x + ", current y: " + currentMouse.y);
 	});
 
-	//draw when mouse is held down
 	$(document).mousedown(function(){
+		nonCanvasClick = true;
+	})
+
+	//draw when mouse is held down
+	$('#myCanvas').mousedown(function(){
 			timeout= setInterval(function(){
 				//console.log("draw called");
 				ctx.beginPath();
@@ -70,11 +131,16 @@
 	});
 
 	$(document).mouseup(function(){
-		clearInterval(timeout);
-		return false;
+		if (nonCanvasClick === false){
+			clearInterval(timeout);
+			return false;
+		}
+		nonCanvasClick = false;	
+
 	});
 
 
+	//toolbox events
 	$("#red").click(function(){
 		color = '#ff0000';
 		console.log(color);
@@ -90,10 +156,73 @@
 		console.log(color);
 	});
 
-	/*$("#width").change(function(){
-		lineWidth =  $("select option:selected").attr(value);
+	$("#width").change(function(){
+		lineWidth =  $("#width").val();
 		console.log(lineWidth)
-	});*/
+	});
+
+	// Google search functions
+
+	function searchComplete(){
+
+		//clear #example
+			$('#example').empty();
+
+		if(imageSearch.results && imageSearch.results.length > 0){
+
+			console.log(imageSearch.results);
+			
+			var results = imageSearch.results;
+
+			//get a random result
+			var randomImage = Math.floor(Math.random()*results.length);
+			var result = results[randomImage];
+
+			var newImg = document.createElement('img');
+			newImg.src= result.url;
+
+			$('#example').append(newImg);
+		}
+		else{
+			$('#example').html('no results');
+		}
+	}
+
+	function search(term){
+
+		imageSearch = new google.search.ImageSearch();
+		imageSearch.setSearchCompleteCallback(this, searchComplete, null);
+
+		imageSearch.execute(term);
+		//google.search.Search.getBranding('branding');
+	}
+	//google.setOnLoadCallback(search);
+
+	//end Google functions
+
+
+
+	
+	$("#random").click(function(){
+		
+
+
+		// gets a random number
+		var randomNumber = Math.floor(Math.random()*total);
+		//gets a random word from wordlist
+		var query = wordlist[randomNumber];
+		
+		search(query);
+		console.log(wordlist[randomNumber]);
+		$('#display').html(wordlist[randomNumber]);
+
+
+
+		//search for images of that word, display in #example
+
+
+	});
+	
 
 </script> 
 

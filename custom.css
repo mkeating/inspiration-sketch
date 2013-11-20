@@ -4,6 +4,34 @@
 	height:40px;
 }
 
+
+.area{
+	min-width: 300px;
+	min-height: 600px;
+	border: 1px solid black;
+	float:left;
+	margin:1em;
+}
+
+.toolbox{
+	float:none;
+}
+.dropdownbox{
+	float:right;
+	border: 1px solid black;
+	min-height: 100px;
+	min-width: 100px;
+}
+#example{
+	vertical-align: middle;
+}
+#example img{
+	max-width: 300px;
+	max-height: 600px;
+	display: block;
+	margin: 0 auto;
+}
+
 #red{
 	background-color: red;
 }
@@ -18,4 +46,8 @@
 
 #garden{
 	float:right;
+}
+
+#random{
+	border: 1px solid black;
 }
