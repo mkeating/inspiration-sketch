@@ -4,7 +4,9 @@
 	height:40px;
 }
 
-
+.full-spectrum .sp-palette {
+max-width: 200px;
+}
 .area{
 	min-width: 300px;
 	min-height: 600px;
