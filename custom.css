@@ -1,37 +1,40 @@
-.button{
-	float: right;
-	width: 40px;
-	height:40px;
+body {
+   font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+   font-weight: 300;
 }
 
 .full-spectrum .sp-palette {
 max-width: 200px;
 }
 .area{
-	min-width: 300px;
-	min-height: 600px;
-	border: 1px solid black;
+	width: 300px;
+	height: 600px;
+	border: 1px solid #B8B8B8;
 	float:left;
 	margin:1em;
+	position: relative;
 }
 
 .toolbox{
-	float:none;
+	float:left;
+	border: 1px solid #B8B8B8;
+	padding:2em;
 }
+
+.toolbox p{
+	color:#484848;
+}
+
 .dropdownbox{
 	float:right;
-	border: 1px solid black;
 	min-height: 100px;
 	min-width: 100px;
 }
-#example{
-	vertical-align: middle;
-}
+
 #example img{
-	max-width: 300px;
-	max-height: 600px;
+	max-width: 100%;
 	display: block;
-	margin: 0 auto;
+	margin-top: 50%;
 }
 
 #red{
@@ -50,6 +53,47 @@ max-width: 200px;
 	float:right;
 }
 
-#random{
+.button{
+
+	border-radius: 15px;
+	color:white;
+	background-color: #3399CC;
+	min-width: 80px;
+	height:40px;
+	margin: 0;
+}
+
+#display{
+	color:#484848;
+	margin-top:0;
+	margin-bottom: 0;
+	border: 1px solid #B8B8B8;
+	}
+
+.example_center{
+	min-height:40px;
+	height: 40px;
+	max-width: 220px;
+	margin: 0 auto;
+}
+
+.buttons{
+		float:left;
+		width:100%;
+		text-align: center;
+}
+
+.draw_container{
+	float:left;
+	max-width: 330px;
 	border: 1px solid black;
+}
+
+#title{
+	color:#3399CC;
+	position: fixed;
+	bottom: 0;
+	font-size: 5em;
+	font-weight: 900;
+	right:0px;
 }
