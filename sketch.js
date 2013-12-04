@@ -3,7 +3,8 @@
 	var imageSearch;
 	var lineColor;
 
-	var ctx=$("#myCanvas")[0].getContext("2d");
+	var canvas = $("#myCanvas")[0];
+	var ctx= canvas.getContext("2d");
 
 	//color picker stuff
 	$("#full").spectrum({
@@ -176,7 +177,7 @@
 
 	
 	$("#random").click(function(){
-		$('#random').html("Get another");
+		$('#random').html("<p>Get another</p>");
 		// gets a random number
 		var randomNumber = Math.floor(Math.random()*total);
 		//gets a random word from wordlist
@@ -186,9 +187,12 @@
 		console.log(wordlist[randomNumber]);
 		$('#display').text(wordlist[randomNumber]);
 
+	});
 
+	$("#save").click(function(){
 
-		//search for images of that word, display in #example
-
+		var dataURL = canvas.toDataURL();
+		window.open(dataURL);
+		console.log(dataURL);
 
 	});
