@@ -1,11 +1,14 @@
-<!-- DOCTYPE html -->
+<!DOCTYPE html>
+
 
 <html>
 <head>
+	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="custom.css">
 	<!-- css for Spectrum color picker -->
 	<link rel='stylesheet' href='bgrins-spectrum-59dfc54\spectrum.css' />
-	</head>
+	<title>Inspiration Sketch</title>
+</head>
 <body>
 
 	<div class="draw_container">
@@ -19,6 +22,9 @@
 				<div class="example_center button" id="save">
 					<p>Save</p>
 				</div>
+				<div class = "instructions hidden" id="save_instruct">
+					<p>When you're finished, click above</p>
+				</div>
 		</div>
 	</div>
 	<div class="draw_container">
@@ -29,6 +35,9 @@
 				</div>
 				<div class="example_center button" id="random">
 					<p>Get inspiration</p>
+				</div>
+				<div class = "instructions hidden" id="inspire_instruct">
+					<p>Click above to get a random image for inspiration</p>
 				</div>
 		</div>
 	</div>
@@ -55,19 +64,23 @@
                <option value = "20">twenty</option>
              </select>
             </div>
-
-	</div>
+        </div><br>
+        <div class="instructions hidden" id="tool_instruct">
+            	<p>Change the properties of your line here</p>
+				</div>
 <div id="title">
 	Inspiration Sketch
 </div>
-</body>
 
 <!-- js -->
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <!-- Spectrum color picker 
 	http://bgrins.github.io/spectrum/ -->
-<script src='bgrins-spectrum-59dfc54\spectrum.js'></script>
-<script src="sketch.js"></script>
+<script type="text/javascript" src='bgrins-spectrum-59dfc54\spectrum.js'></script>
+<script type="text/javascript" src="sketch.js"></script>
+</body>
+
+
 
 </html> 
