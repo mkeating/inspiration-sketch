@@ -77,7 +77,7 @@
 
 		//read wordlist into an array on pageload
 		//wordlist courtesy of http://www.curlewcommunications.co.uk/wordlist.html
-		var file = $.get('http://p3.dwakeat.biz/wordlist/brit-a-z.txt', function(text){
+		var file = $.get('http://mkeat.net/wordlist/brit-a-z.txt', function(text){
 				
 				var lines = text.split('\n');
 				total = lines.length;
