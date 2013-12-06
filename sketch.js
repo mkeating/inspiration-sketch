@@ -197,6 +197,15 @@
 	//end Google functions
 
 
+	//button functions
+
+	$('.button').mousedown(function(){
+		$(this).css("background-color", "red");
+	});
+
+	$('.button').mouseup(function(){
+		$(this).css("background-color", "#3399CC");
+	});
 
 	
 	$("#random").click(function(){
