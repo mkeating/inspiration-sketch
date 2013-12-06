@@ -12,7 +12,7 @@
     change: function(color){
     	if(color){
     		lineColor = color.toHexString();
-    		console.log(lineColor);
+    		/*console.log(lineColor);*/
     	}
     },
     showInput: true,
@@ -164,9 +164,15 @@
 	function imgSearch(term){
 
 		imageSearch = new google.search.ImageSearch();
+		
 		imageSearch.setSearchCompleteCallback(this, searchComplete, null);
+		try{
+			imageSearch.execute(term);
+		} catch (e){
+			console.log("some error");
+		}
 
-		imageSearch.execute(term);
+		
 		//google.search.Search.getBranding('branding');
 	}
 	//google.setOnLoadCallback(search);
@@ -184,7 +190,7 @@
 		var query = wordlist[randomNumber];
 		
 		imgSearch(query);
-		console.log(wordlist[randomNumber]);
+		/*console.log(wordlist[randomNumber]);*/
 		$('#display').text(wordlist[randomNumber]);
 
 	});
@@ -193,6 +199,6 @@
 
 		var dataURL = canvas.toDataURL();
 		window.open(dataURL);
-		console.log(dataURL);
+		/*console.log(dataURL);*/
 
 	});
