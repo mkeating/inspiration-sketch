@@ -73,7 +73,7 @@
 	var nonCanvasClick = false;
 
 	
-	$(function(){
+	$(document).ready(function(){
 
 		//read wordlist into an array on pageload
 		//wordlist courtesy of http://www.curlewcommunications.co.uk/wordlist.html
